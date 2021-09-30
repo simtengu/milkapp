@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bottle extends Model
+class FreshBottle extends Model
 {
     use HasFactory;
-    protected $fillable = ['type','price'];
+    protected $fillable = ['capacity','price'];
 }

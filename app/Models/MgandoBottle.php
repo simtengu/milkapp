@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Income extends Model
+class MgandoBottle extends Model
 {
     use HasFactory;
-    protected $fillable = ['milk_type','bottle_capacity','price','quantiry','amount'];
-
-
+    protected $fillable = ['capacity','price'];
 }

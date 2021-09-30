@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLitresTable extends Migration
+class CreateMgandoVolumesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateLitresTable extends Migration
      */
     public function up()
     {
-        Schema::create('litres', function (Blueprint $table) {
+        Schema::create('mgando_volumes', function (Blueprint $table) {
             $table->id();
-            $table->integer('price_per_litre');
+            $table->string('volume');
+            $table->integer('price');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateLitresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('litres');
+        Schema::dropIfExists('mgando_volumes');
     }
 }
