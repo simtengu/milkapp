@@ -1,0 +1,27 @@
+body {
+  background-color: #dfdfdf;
+}
+
+.login-div {
+  display: inline-block;
+  border-radius: 4px;
+}
+
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+}
+
+.login-btn {
+  background-color: #5734a1;
+  color: white;
+  text-align: center;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: #5734a1;
+  border: 1px solid #5734a1;
+}
