@@ -25,3 +25,111 @@ body {
   color: #5734a1;
   border: 1px solid #5734a1;
 }
+
+.cl-primary {
+  color: #5734a1;
+}
+
+.app-title {
+  font-size: 34px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.first-level-title {
+  font-size: 29px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+#loader_container {
+  display: none;
+}
+
+#page_loader {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(178, 178, 178, 0.6);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-app {
+  color: #5734a1;
+}
+
+.text-app-bg {
+  color: #dfdfdf;
+}
+
+.bg-app {
+  background-color: #dfdfdf !important;
+}
+
+.text-arial {
+  font-family: arial narrow;
+}
+
+.text-times {
+  font-family: times new roman;
+}
+
+.font-15 {
+  font-size: 15px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-17 {
+  font-size: 17px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.bottle-div {
+  border-radius: 100%;
+}
+.bottle-div:hover {
+  box-shadow: 2px 4px 10px #5734a1;
+}
+
+.vessel-div {
+  border-radius: 100%;
+}
+.vessel-div:hover {
+  box-shadow: 2px 4px 10px #5734a1;
+}
+
+.btn-app {
+  background-color: #5734a1;
+  color: white;
+}
+.btn-app:hover {
+  color: #5734a1 !important;
+  background-color: white !important;
+  border: 1px solid #5734a1 !important;
+}
+
+.btn-app-outline {
+  border: 1px solid #5734a1;
+  color: #5734a1;
+}
+
+.primary-bg {
+  background-color: #5734a1 !important;
+}
+
+#editFormInput {
+  background-color: transparent !important;
+  color: white;
+  width: 100px;
+  border: none;
+}

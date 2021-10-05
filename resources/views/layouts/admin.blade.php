@@ -9,72 +9,33 @@
         <link href="{{ asset('/css/bootstrap.min.css') }}" rel="styleSheet" />
         <link href="{{ asset('/css/app.css') }}" rel="styleSheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-        <style type="text/css">
-            
-            .text-arial {
-                font-family: arial narrow;
-            }
-            .text-times {
-                font-family: times new roman;
-            }
-            .font-15 {
-                font-size: 15px;
-            }
+        <style>
+            /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-            .font-16 {
-              font-size: 16px;
-            }
-
-            .font-17 {
-              font-size: 16px;
-            }
-
-            .font-18 {
-              font-size: 16px;
-            }
-
-            #adminProductLink:hover {
-                text-decoration: none;
-                
-            }
-            #delete-form {
-                position: fixed;
-                top: 10%;
-                left: 50%;
-                z-index: 10;
-                box-shadow: 3px 3px 180px black;
-                padding: 12px;
-                background-color: #7ad9f1;
-                display: none;
-            }
-           #userProductsDiv .link {
-            text-decoration: none;
-            color: black;
-           }
-           #userProductsDiv .media:hover {
-              box-shadow:  2px 2px 4px black;
-           }
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
         </style>
     </head> 
     <body class="sb-nav-fixed">
+        <div id="loader_container">
+            <div id="page_loader">
+                    <div id="spinner" class="spinner-border text-primary"></div>
+            </div>
+        </div>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ route('dashboard') }}">MilkApp</a>
+            <a style="color:#5734a1;text-shadow: 1px  1px black;font-weight:bold" class="navbar-brand" href="{{ route('dashboard') }}">MilkApp</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"> <img src="{{ asset('images') }}/toggler4.png"></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                @csrf
-                 <input type="hidden" id="user_search_path" value="{{ url('/admin_email_fetch') }}" >
-                <div style="position: relative;" class="input-group">
-                    <input id="user_search_field" class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                     
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                    </div>
-                     <ul id="search_results_ul" style="position: absolute;left: 0px;top:42px; z-index:110; width: 100%;" class="list-group">
-                      
-                     </ul>
-                </div>
-            </form>
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
+            </div>
             
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
@@ -98,12 +59,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
+                        
                             <a  class="nav-link text-uppercase" href="{{ route('dashboard') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a  class="nav-link text-capitalize" href="#">
+                            <a  class="nav-link text-capitalize" href="{{ route('income.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Incomes
                             </a>
@@ -114,8 +75,11 @@
                             @auth
                              @if(Auth::user()->isAdmin())
 
-                           
-                                
+                            <a  class="nav-link text-capitalize" href="{{ route('edit_info') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                                Edit information
+                            </a>
+
                             <a  class="nav-link text-capitalize" href="{{route('new_user')  }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Add user
@@ -152,7 +116,7 @@
                     </div>
                     @auth                      
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div style="text-shadow: 1px 1px black" class="small text-lead font-16 text-app">Logged in as:</div>
                          {{ Auth::user()->name }}
                     </div>
                     @endauth
