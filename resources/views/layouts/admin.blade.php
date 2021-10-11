@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>Chuobusiness admin</title>
+        <title>Mbeya milk</title>
         <link type="text/css" href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
         <link href="{{ asset('/css/bootstrap.min.css') }}" rel="styleSheet" />
         <link href="{{ asset('/css/app.css') }}" rel="styleSheet" />
@@ -30,7 +30,13 @@ input[type=number] {
             </div>
         </div>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a style="color:#5734a1;text-shadow: 1px  1px black;font-weight:bold" class="navbar-brand" href="{{ route('dashboard') }}">MilkApp</a>
+           <div style="display:inline-block; padding: 0px;"> 
+               <a style="margin: 0px; color:#5734a1;text-shadow: 1px  1px black;font-weight:bold;" class="navbar-brand" href="{{ route('dashboard') }}"><span class="text-light">Mbeya</span>Milk</a>
+               <div style="position: relative;bottom:4px;left:2px" class="d-flex ml-4 mb-2">
+                   <div class="primary-bg" style="height: 3px;width:37px;"></div>
+                   <div class="bg-app" style="height: 3px;width:37px;"></div>
+               </div>
+            </div> 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"> <img src="{{ asset('images') }}/toggler4.png"></button>
             <!-- Navbar Search-->
             <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -42,8 +48,7 @@ input[type=number] {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img width="45" src="{{ asset('images') }}/user.png"></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Home</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <a class="dropdown-item" href="{{ route('edit_details') }}">Edit your details</a>
                         <a class="dropdown-item" href="#"
 			                     onclick="event.preventDefault();
 			                    document.getElementById('logout-form').submit();">logout </a>  
@@ -68,9 +73,9 @@ input[type=number] {
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Incomes
                             </a>
-                            <a  class="nav-link text-capitalize" href="#">
+                            <a  class="nav-link text-capitalize" href="{{ route('expense.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Consumptions
+                                Expenses
                             </a>
                             @auth
                              @if(Auth::user()->isAdmin())
@@ -92,8 +97,8 @@ input[type=number] {
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class=" text-light" href="#" >
-                                        income reports
+                                    <a class=" text-light" href="{{ route('general.report') }}" >
+                                        General report
                                     </a>
                                     <a class="text-light " href="#" >
                                         consumption reports

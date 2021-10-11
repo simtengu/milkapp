@@ -108,6 +108,10 @@ body {
   box-shadow: 2px 4px 10px #5734a1;
 }
 
+.bg-light-grey {
+  background-color: #f2f2f2;
+}
+
 .btn-app {
   background-color: #5734a1;
   color: white;
@@ -121,6 +125,11 @@ body {
 .btn-app-outline {
   border: 1px solid #5734a1;
   color: #5734a1;
+  font-weight: bold;
+}
+.btn-app-outline:hover {
+  background-color: #5734a1;
+  color: white;
 }
 
 .primary-bg {

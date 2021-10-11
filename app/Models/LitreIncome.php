@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LitreIncome extends Model
 {
     use HasFactory;
-    protected $fillable = ['milk_type','volume','price','quantity','amount'];
+    protected $fillable = ['added_by','milk_type','volume','price','quantity','amount'];
 
       
 }
