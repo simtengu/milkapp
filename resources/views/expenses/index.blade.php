@@ -27,6 +27,8 @@
                         <option value="Manunuzi ya stika">Manunuzi ya stika</option>
                         <option value="Kutuma mzigo">Kutuma mzigo</option>
                         <option value="Manunuzi ya maji">Manunuzi ya maji</option>
+                        <option value="mishahara ya wafanyakazi">maziwa kuharibika</option>
+                    
                         <option value="mishahara ya wafanyakazi">mishahara ya wafanyakazi</option>
                         <option value="other">sababu nyingine</option>
                     </select>

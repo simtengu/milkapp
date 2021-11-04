@@ -8,7 +8,7 @@
                     <div class="text-center">
                         <div class="d-inline-block p-1 thumbnail bottle-div">
                             <img id="bottle-div-img" width="100" class="rounded-circle"
-                                src="{{ asset('/images/bottle.jpg') }}" alt="bottole img" />
+                                src="{{ asset('/images/bottle1.jpg') }}" alt="bottole img" />
                         </div>
                         <label class="my-2 d-block text-times">Chupa</label>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="text-center">
                         <div class="d-inline-block p-1 thumbnail vessel-div">
                             <img id="yogurt-div-img" width="100" class="rounded-circle"
-                                src="{{ asset('/images/normal.jpg') }}" alt="bottole img" />
+                                src="{{ asset('/images/yg1.jpg') }}" alt="bottole img" />
                         </div>
                         <label class="my-2 d-block text-times">Yogurt</label>
                     </div>

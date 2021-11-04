@@ -22,7 +22,7 @@
                                 @csrf
                                   <div class="form-group">
                                       <input name="date" class="form-control" type="date" required>
-                                      <button class="btn btn-app-outline btn-sm btn-block">submit</button>
+                                      <button class="btn btn-app-outline mt-2 btn-sm btn-block">submit</button>
                                   </div>
                                   
                               </form>
@@ -99,16 +99,16 @@
         
                     {{-- move through matumizi kwa chupa,lita,yogurt........................................ --}}
                     <hr>
-                    <div class="d-flex justify-content-start my-3">
-                    <div class="mx-3">
+                    <div style="flex-wrap: wrap" class="d-flex  justify-content-start my-3">
+                    <div class="mx-3 my-1">
                         <button id="mapato_kwa_chupa_btn" class="btn text-app font-weight-bold text-times font-16 bg-light-grey">kwa chupa</button>
                     </div>
 
-                    <div class="mx-3">
+                    <div class="mx-3 my-1">
                         <button id="mapato_kwa_lita_btn" class="btn text-app font-weight-bold text-times font-16 bg-light-grey">kwa rejareja</button>
                     </div>
 
-                    <div class="mx-3">
+                    <div class="mx-3 my-1">
                         <button id="mapato_kwa_yogurt_btn" class="btn text-app font-weight-bold text-times font-16 bg-light-grey">kwa yogurt</button>
                     </div>
 

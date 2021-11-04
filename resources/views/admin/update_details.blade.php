@@ -13,7 +13,7 @@
 						</div>
                         @endif
 
-                           <h2 style="color:#5734a1" class="text-dark text-times text-capitalize">update information here</h2>
+                           <h2 style="color:#5734a1" class=" text-times text-capitalize">update information here</h2>
                             <div class="form-group">
                                 <input class="form-control" type="text" name="name" value="{{ Auth::user()->name }}" placeholder="name"  required/>
                             </div>
@@ -35,7 +35,8 @@
                   </div>              
              </div>
              <div class="col-md-6 p-2" id="users_div">
-                 <h4 class="text-times text-app">Normal users</h4>
+                 <div class="px-3 mt-2"><h4 class="text-times  text-app">Normal users</h4></div>
+                 
                         @if (Session()->has('user_removed'))
 						<div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>

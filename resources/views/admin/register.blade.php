@@ -3,7 +3,7 @@
   <div class="container">
         <div class="row justify-content-center">
              <div class="col-md-6" id="loginContainer">  
-                 <div class="login-div px-5 py-10" >
+                 <div class="login-div px-1 px-md-5 py-10" >
                     <form id="reg_form" method="POST" action="{{ route('save_user') }}" class="form">
                         @csrf
                         @if (Session()->has('user_saved'))

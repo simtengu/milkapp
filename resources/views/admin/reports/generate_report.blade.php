@@ -22,7 +22,7 @@
                                 @csrf
                                   <div class="form-group">
                                       <input name="date" class="form-control" type="date" required>
-                                      <button class="btn btn-app-outline btn-sm btn-block">submit</button>
+                                      <button class="btn btn-app btn-sm mt-1 btn-block">submit</button>
                                   </div>
                                   
                               </form>

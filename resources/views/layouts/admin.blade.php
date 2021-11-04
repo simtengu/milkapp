@@ -20,6 +20,7 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+
 }
         </style>
     </head> 
@@ -37,7 +38,7 @@ input[type=number] {
                    <div class="bg-app" style="height: 3px;width:37px;"></div>
                </div>
             </div> 
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"> <img src="{{ asset('images') }}/toggler4.png"></button>
+            <button style="position: relative; right: 9px" class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"> <img src="{{ asset('images') }}/toggler4.png"></button>
             <!-- Navbar Search-->
             <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
@@ -46,9 +47,11 @@ input[type=number] {
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img width="45" src="{{ asset('images') }}/user.png"></a>
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img width="45" src="{{ asset('images') }}/user1.png"></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ route('edit_details') }}">Edit your details</a>
+                       @if (Auth::user()->isAdmin())
+                           <a class="dropdown-item" href="{{ route('edit_details') }}">Edit your details</a>
+                       @endif  
                         <a class="dropdown-item" href="#"
 			                     onclick="event.preventDefault();
 			                    document.getElementById('logout-form').submit();">logout </a>  
@@ -64,29 +67,44 @@ input[type=number] {
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                        
+                          @auth
+                          
                             <a  class="nav-link text-uppercase" href="{{ route('dashboard') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
+                           
                             <a  class="nav-link text-capitalize" href="{{ route('income.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
                                 Incomes
                             </a>
                             <a  class="nav-link text-capitalize" href="{{ route('expense.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
                                 Expenses
                             </a>
+                            <a  class="nav-link text-capitalize" href="{{ route('production') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
+                                Production
+                            </a>
+                            <a  class="nav-link text-capitalize" href="{{ route('stock.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
+                                Stock
+                            </a>                 
+                         @endauth
+
                             @auth
                              @if(Auth::user()->isAdmin())
-
+                            <a  class="nav-link text-capitalize" href="{{ route('production.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
+                                Achievements
+                            </a>
                             <a  class="nav-link text-capitalize" href="{{ route('edit_info') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
                                 Edit information
                             </a>
 
                             <a  class="nav-link text-capitalize" href="{{route('new_user')  }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Add user
                             </a>
                             
@@ -98,24 +116,17 @@ input[type=number] {
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class=" text-light" href="{{ route('general.report') }}" >
-                                        General report
+                                        View reports
                                     </a>
-                                    <a class="text-light " href="#" >
-                                        consumption reports
+                                    <a class="text-light " href="{{ route('print_reports') }}" >
+                                        Print reports
                                     </a>
-                                    <a class="text-light " href="#" >
-                                        Reported posts
-                                    </a>
+                             
                                     
                                 </nav>
                             </div>
                              @endif
                             @endauth
-                      
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
 
                         </div>
                     </div>
@@ -134,11 +145,10 @@ input[type=number] {
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div class="text-info">Copyright &copy; Mbeya Milk</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <span class="text-muted">By </span><a href="#" class="text-muted">albertsimtengu@gmail.com</a>
+                                 
                             </div>
                         </div>
                     </div>

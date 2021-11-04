@@ -8,6 +8,7 @@ use App\Http\Controllers\SellsController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -38,7 +39,7 @@ Route::post('/save_mgando_bottle', [AdminController::class, 'save_mgando_bottle_
 Route::patch('/update_mgando_bottle/{bottle_id}', [AdminController::class, 'edit_mgando_bottle_details'])->name('edit_mgando_bottle_details');
 Route::delete('/delete_mgando_bottle/{bottle_id}', [AdminController::class, 'remove_mgando_bottle'])->name('delete_mgando_bottle');
 //end of mgando milk bottle routes......................................................... 
-
+  
 //mgando milk volume routes..........................................
 Route::post('/save_mgando_volume', [AdminController::class, 'save_mgando_volume_details'])->name('save_mgando_volume_details');
 Route::patch('/update_mgando_volume/{volume_id}', [AdminController::class, 'edit_mgando_volume_details'])->name('edit_mgando_volume_details');
@@ -84,7 +85,7 @@ Route::patch('/update_bottle_income/{income_id}',[IncomeController::class,'updat
 
 Route::get('/edit_litre_income/{income_id}', [IncomeController::class, 'edit_litre_income'])->name('edit_litre_income');
 Route::patch('/update_litre_income/{income_id}',[IncomeController::class,'update_litre_income'])->name('update_litre_income');
-
+ 
 Route::get('/edit_yogurt_income/{income_id}', [IncomeController::class, 'edit_yogurt_income'])->name('edit_yogurt_income');
 Route::patch('/update_yogurt_income/{income_id}',[IncomeController::class,'update_yogurt_income'])->name('update_yogurt_income');
 //end of income update routes.............................................................. 
@@ -97,7 +98,7 @@ Route::delete('/remove_yogurt_income/{income_id}', [IncomeController::class, 're
 //Expenses routes..............................................................
 Route::resource('/expense', ExpenseController::class)->middleware('auth');
 
-//admin reports routes..............................................................
+//admin reports display routes..............................................................
 Route::get('/general_report', [ReportController::class, 'index'])->name('general.report');
 Route::get('/all_data_report', [ReportController::class, 'all_data'])->name('all.report');
 Route::post('/date_report', [ReportController::class, 'date_data'])->name('date.report');
@@ -110,7 +111,25 @@ Route::get('/print/all_data_report', [ReportController::class, 'print_all_data']
 Route::post('print//date_report', [ReportController::class, 'print_date_data'])->name('print.date.report');
 Route::post('print//date_range_report', [ReportController::class, 'print_date_range_data'])->name('print.date_range.report');
 
+//admin production display routes..................................................
+Route::get('/achievements',[ReportController::class,'production'])->name('production.index');
+Route::get('/production_all_data',[ReportController::class,'production_all_data'])->name('production.all_filter');
+Route::post('/production/date_report', [ReportController::class, 'production_date'])->name('production.date_filter');
+Route::post('/production/date_range_report', [ReportController::class, 'production_date_range'])->name('production.date_range_filter');
 //end of admin reports routes.......................................................
+//stock and production routes.....................................................................................
+Route::get('/stock',[ProductionController::class,'stock'])->middleware('auth','isAdmin')->name('stock.index');
+Route::get('/production',[ProductionController::class,'index'])->middleware('auth','isAdmin')->name('production');
+Route::post('/production/receive_milk', [ProductionController::class, 'receive_milk'])->middleware('auth','isAdmin')->name('production.receive_milk');
+Route::patch('/update_received_litre/{id}',[ProductionController::class, 'update_received_milk'])->middleware('auth','isAdmin')->name('production.update_received_milk');
+
+//litre production................ 
+Route::post('/production/litre_production', [ProductionController::class, 'produce_litre'])->middleware('auth','isAdmin')->name('production.produce_litre');
+Route::patch('/update_litres_produced/{id}',[ProductionController::class, 'update_litre_produced'])->middleware('auth','isAdmin')->name('production.update_litre_produced');
+
+//bottle production................ 
+Route::post('/production/bottle_production', [ProductionController::class, 'produce_bottle'])->name('production.produce_bottle');
+//end of stock and production routes..............................................................................
 Route::get('/testing',function(){
     
   return Carbon::today()->toDateString()." and ".Carbon::today()->subDay();

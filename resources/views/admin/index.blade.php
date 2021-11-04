@@ -5,7 +5,7 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Reports</div>
+                                    <div class="card-body">View Reports</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{ route('general.report') }}">Visit</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Print</div>
+                                    <div class="card-body">Print Reports</div>
                                    
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{ route('print_reports') }}">View Details</a>
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
+                            {{-- <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Chart</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -39,7 +39,7 @@
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-10">
                             @if (Session()->has('income_removed'))
                                 <div class="alert alert-success my-3">
@@ -57,15 +57,15 @@
                             </div>
                             <div class="card-body">
                             <div class="row justify-content-start mb-3">
-                                <div class="mx-3">    
+                                <div class="mx-3 my-1">    
                                 <button id="kwaChupaBtn" class="btn btn-app text-times font-18">kwa chupa</button>
                                 </div>
 
-                                <div class="mx-3">
-                                <button id="kwaLitaBtn" class="btn btn-app text-times font-18">kwa lita</button>    
+                                <div class="mx-3 my-1">
+                                <button id="kwaLitaBtn" class="btn btn-app text-times font-18">kwa rejareja</button>    
                                 </div>
 
-                                <div class="mx-3">
+                                <div class="mx-3 my-1">
                                 <button id="kwaYogurtBtn" class="btn btn-app text-times font-18">kwa Yogurt</button>    
                                 </div>
                                
@@ -94,7 +94,7 @@
                                                 <td>{{ $count }}</td>
                                                 <td>{{ $income->milk_type }}</td>
                                                 <td>{{ $income->bottle_capacity }}</td>
-                                                <td>{{ $income->price }}</td>
+                                                <td>{{ number_format($income->price)  }}</td>
                                                 <td>{{ $income->quantity }}</td>
                                                 <td>{{ number_format($income->amount) }}</td>
                                                 <td>{{ $income->created_at->diffForHumans() }}</td>
@@ -105,7 +105,7 @@
                                             <?php  $count = $count + 1; ?>
                                         @endforeach
                                         @else
-                                              <tr><td colspan="6" class="text-app text-center"> hakuna taarifa</td></tr>
+                                              <tr><td colspan="8" class="text-app text-center"> hakuna taarifa</td></tr>
                                      @endif
                                   
                                         </tbody>
@@ -142,7 +142,7 @@
                                                 <td>{{ $counter }}</td>
                                                 <td>{{ $income->milk_type }}</td>
                                                 <td>{{ $income->volume }}</td>
-                                                <td>{{ $income->price }}</td>
+                                                <td>{{ number_format($income->price)  }}</td>
                                                 <td>{{ $income->quantity }}</td>
                                                 <td>{{ number_format($income->amount)  }}</td>
                                                 <td class="text-center">
@@ -188,7 +188,7 @@
                                             <tr>
                                                 <td>{{ $j }}</td>
                                                 <td>{{ $income->capacity }}</td>
-                                                <td>{{ $income->price }}</td>
+                                                <td>{{ number_format($income->price)  }}</td>
                                                 <td>{{ $income->quantity }}</td>
                                                 <td>{{ number_format($income->amount) }}</td>
                                                 <td class="text-center">

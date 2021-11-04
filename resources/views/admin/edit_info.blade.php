@@ -59,7 +59,7 @@
                             <p>{{ Session('fresh_bottle_edited') }}</p>
                         </div>
                     @endif
-
+                    <div class="table-responsive">
                     <table class="table table-dark table-striped table-hover">
                         <thead>
                             <tr>
@@ -68,7 +68,7 @@
                                 <th>
                                     <div class="text-right">
                                         <button type="button" data-toggle="modal" data-target="#chupaFreshMilkForm"
-                                            class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i></button>
+                                            class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i>add</button>
                                     </div>
                                 </th>
                             </tr>
@@ -83,22 +83,31 @@
                                         @csrf
                                         <td><input name="capacity" id="editFormInput" value="{{ $bottle->capacity }}"
                                                 type="text" required /></td>
-                                        <td><input name="price" id="editFormInput" value={{ $bottle->price }}
-                                                type="number" required /></td>
                                         <td>
-                                            <div class="d-flex justify-content-around">
-                                                <button type="submit" class="btn btn-warning btn-sm"><i
-                                                        class="fas fa-edit"></i></button>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div>                                             
+                                            <input name="price" id="editFormInput" value={{ $bottle->price }}
+                                                type="number" required /> 
+                                            </div>
+                                            <div>
+                                             
+                                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                                        class="fas fa-edit"></i>edit</button>                                                
+                                            </div>
+                                            </div>
                                     </form>
+                                        </td>
+                                        <td>
+                                 
                                     <form id="delete_fresh_bottle_form" method="POST"
                                         action="{{ route('delete_fresh_bottle', $bottle->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick=" if( !confirm('unathibitisha kufuta taarifa hii')){
                                 event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fas fa-trash"></i></button>
+                                                class="fas fa-trash"></i>delete</button>
                                     </form>
-                </div>
+                              
                 </td>
                 </tr>
             @empty
@@ -107,6 +116,7 @@
 
                 </tbody>
                 </table>
+                </div>
             </div>
             {{-- mauzo kwa ujazo maziwa fresh section.......................................................... --}}
             {{-- modal......................................... --}}
@@ -162,6 +172,7 @@
                         <p>{{ Session('fresh_volume_edited') }}</p>
                     </div>
                 @endif
+                <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
                     <thead>
                         <tr>
@@ -170,7 +181,7 @@
                             <th>
                                 <div class="text-right">
                                     <button type="button" data-toggle="modal" data-target="#litaFreshMilkForm"
-                                        class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i></button>
+                                        class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i>add</button>
                                 </div>
                             </th>
                         </tr>
@@ -185,22 +196,34 @@
                                     @csrf
                                     <td><input name="volume" id="editFormInput" value="{{ $volume->volume }}" type="text"
                                             required /></td>
-                                    <td><input name="price" id="editFormInput" value={{ $volume->price }} type="number"
-                                            required /></td>
                                     <td>
-                                        <div class="d-flex justify-content-around">
-                                            <button type="submit" class="btn btn-warning btn-sm"><i
-                                                    class="fas fa-edit"></i></button>
-                                </form>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                        
+                                        <div>
+                                        <input name="price" id="editFormInput" value={{ $volume->price }} type="number"
+                                            required />                                            
+                                        </div>
+                                        <div>
+                                             <button type="submit" class="btn btn-warning btn-sm"><i
+                                                    class="fas fa-edit"></i>edit</button>                                           
+                                        </div>
+
+                                        </div> 
+
+                                </form>                                    
+                                    </td>
+                                    <td>
+                                     
+
                                 <form id="delete_fresh_volume_form" method="POST"
                                     action="{{ route('delete_fresh_volume', $volume->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick=" if( !confirm('unathibitisha kufuta taarifa hii')){
                                 event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"><i
-                                            class="fas fa-trash"></i></button>
+                                            class="fas fa-trash"></i>edit</button>
                                 </form>
-            </div>
+            
             </td>
             </tr>
         @empty
@@ -209,6 +232,7 @@
 
             </tbody>
             </table>
+            </div>
         </div>
     </div>
     {{-- taarifa juu ya maziwa mgando section............................................... --}}
@@ -272,7 +296,7 @@
                     <p>{{ Session('mgando_bottle_edited') }}</p>
                 </div>
             @endif
-
+             <div class="table-responsive">
             <table class="table table-dark table-striped table-hover">
                 <thead>
                     <tr>
@@ -281,7 +305,7 @@
                         <th>
                             <div class="text-right">
                                 <button type="button" data-toggle="modal" data-target="#chupaMgandoMilkForm"
-                                    class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i></button>
+                                    class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i>add</button>
                             </div>
                         </th>
                     </tr>
@@ -296,22 +320,34 @@
                                 @csrf
                                 <td><input name="capacity" id="editFormInput" value="{{ $bottle->capacity }}" type="text"
                                         required /></td>
-                                <td><input name="price" id="editFormInput" value={{ $bottle->price }} type="number"
-                                        required /></td>
                                 <td>
-                                    <div class="d-flex justify-content-around">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                    <input name="price" id="editFormInput" value={{ $bottle->price }} type="number"
+                                        required />                                            
+                                        </div>
+                                        <div>
                                         <button type="submit" class="btn btn-warning btn-sm"><i
-                                                class="fas fa-edit"></i></button>
-                            </form>
+                                                class="fas fa-edit"></i>edit</button>                                            
+                                            
+                                        </div>
+                                    </div>
+                                        
+                                </td>
+
+                            </form>                                
+                                <td>
+                                    
+
                             <form id="delete_fresh_bottle_form" method="POST"
                                 action="{{ route('delete_mgando_bottle', $bottle->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button onclick=" if( !confirm('unathibitisha kufuta taarifa hii')){
                                 event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"><i
-                                        class="fas fa-trash"></i></button>
+                                        class="fas fa-trash"></i>delete</button>
                             </form>
-        </div>
+        
         </td>
         </tr>
     @empty
@@ -320,6 +356,7 @@
 
         </tbody>
         </table>
+        </div>
     </div>
     {{-- mauzo kwa ujazo maziwa mgando section................................................. --}}
 
@@ -374,6 +411,7 @@
                 <p>{{ Session('mgando_volume_edited') }}</p>
             </div>
         @endif
+        <div class="table-responsive">
         <table class="table table-dark table-striped table-hover">
             <thead>
                 <tr>
@@ -382,7 +420,7 @@
                     <th>
                         <div class="text-right">
                             <button type="button" data-toggle="modal" data-target="#litaMgandoMilkForm"
-                                class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i></button>
+                                class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i>add</button>
                         </div>
                     </th>
                 </tr>
@@ -396,22 +434,37 @@
                             @csrf
                             <td><input name="volume" id="editFormInput" value="{{ $volume->volume }}" type="text"
                                     required /></td>
-                            <td><input name="price" id="editFormInput" value={{ $volume->price }} type="number"
-                                    required /></td>
+
+
                             <td>
-                                <div class="d-flex justify-content-around">
-                                    <button type="submit" class="btn btn-warning btn-sm"><i
-                                            class="fas fa-edit"></i></button>
-                        </form>
+<div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                <input name="price" id="editFormInput" value={{ $volume->price }} type="number"
+                                    required />                                           
+                                        </div>
+                                        <div>
+                                      <button type="submit" class="btn btn-warning btn-sm"><i
+                                            class="fas fa-edit"></i>edit</button>                                            
+                                            
+                                        </div>
+
+</div>
+
+                    
+                            </td>
+
+                        </form>                            
+                            <td>
+
                         <form id="delete_mgando_volume_form" method="POST"
                             action="{{ route('delete_mgando_volume', $volume->id) }}">
                             @csrf
                             @method('DELETE')
                             <button onclick=" if( !confirm('unathibitisha kufuta taarifa hii')){
                                 event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"><i
-                                    class="fas fa-trash"></i></button>
+                                    class="fas fa-trash"></i>delete</button>
                         </form>
-    </div>
+    
     </td>
     </tr>
 @empty
@@ -420,6 +473,7 @@
 
     </tbody>
     </table>
+    </div>
     </div>
     </div>
     </div>
@@ -482,7 +536,7 @@
                             <p>{{ Session('yogurt_bottle_edited') }}</p>
                         </div>
                     @endif
-
+                    <div class="table-responsive">
                     <table class="table table-dark table-striped table-hover">
                         <thead>
                             <tr>
@@ -491,7 +545,7 @@
                                 <th>
                                     <div class="text-right">
                                         <button type="button" data-toggle="modal" data-target="#yogurtForm"
-                                            class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i></button>
+                                            class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i>add</button>
                                     </div>
                                 </th>
                             </tr>
@@ -506,22 +560,36 @@
                                         @csrf
                                         <td><input name="capacity" id="editFormInput" value="{{ $bottle->capacity }}"
                                                 type="text" required /></td>
-                                        <td><input name="price" id="editFormInput" value={{ $bottle->price }} type="number"
-                                                required /></td>
                                         <td>
-                                            <div class="d-flex justify-content-around">
-                                                <button type="submit" class="btn btn-warning btn-sm"><i
-                                                        class="fas fa-edit"></i></button>
-                                    </form>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    
+                                            <input name="price" id="editFormInput" value={{ $bottle->price }} type="number"
+                                                required />                                                    
+                                                </div>
+                                                <div>
+                                                    
+                                                 <button type="submit" class="btn btn-warning btn-sm"> <span class="d-flex align-items-center"><i
+                                                        class="fas fa-edit"></i>edit</span> </button>                                                    
+                                                </div>
+                                            </div>
+
+                                                
+                                        </td>
+
+                                    </form>                                       
+                                        <td>
+                                           
+
                                     <form id="delete_yogurt_bottle_form" method="POST"
                                         action="{{ route('delete_yogurt_bottle', $bottle->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick=" if( !confirm('unathibitisha kufuta taarifa hii')){
-                        event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fas fa-trash"></i></button>
+                        event.preventDefault(); }" type="submit" class="btn btn-danger btn-sm"> <span class="d-flex align-items-center"><i
+                                                class="fas fa-trash"></i>delete</span></button>
                                     </form>
-                </div>
+               
                 </td>
                 </tr>
             @empty
@@ -530,6 +598,7 @@
 
                 </tbody>
                 </table>
+                </div>
             </div>
             {{-- mauzo kwa ujazo maziwa fresh section.......................................................... --}}
             {{-- modal......................................... --}}
