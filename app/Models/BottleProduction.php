@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class BottleProduction extends Model
 {
     use HasFactory;
-    protected $fillable = ['id','milk_type','bottle_capacity','litre'];
+    protected $fillable = ['id','milk_type','bottle_capacity','litre','bottle_quantity'];
 }

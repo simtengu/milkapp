@@ -37,142 +37,11 @@
                 @endif
 
                 {{-- mauzo kwa chupa section........................................................... --}}
-                <div style="display: none" class="pt-5 my-2 my-md-5" id="chupa">
-                    <h5 class="h4 py-3 text-app text-times">Mauzo kwa chupa</h5>
-                    <form method="POST" action="{{ route('save_bottle_income') }}" class="form">
-                        @csrf
-                        <div class="form-group">
-                            <label for="bottleMilkType">Aina ya maziwa</label>
-                            <select style="width:110px" class="d-block p-1" name="milk_type" id="bottleMilkType">
-                                <option selected value="mgando">mgando</option>
-                                <option value="fresh">fresh</option>
-                            </select>
-                        </div>
-
-                        <div id="bottle_capacity_container" class="form-group">
-                            <label for="bottleCapacity">Aina ya chupa</label>
-                            <select style="width:110px" class="d-block p-1" name="bottle_capacity" id="bottleCapacity">
-                                @forelse ($mgando_bottles as $bottle)
-                                    <option value={{ $bottle->price }}>{{ $bottle->capacity }}</option>
-                                @empty
-                                    <option value="">hakuna taarifa</option>
-                                @endforelse
-                            </select>
-                        </div>
-
-                        <div class="my-2">
-                            <label for="bottle_price">bei ya chupa</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;"
-                                value={{ $mgando_bottles->count() > 0 ? $mgando_bottles[0]->price : 0 }} type="number"
-                                id="bottle_price" name="price" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <div id="bottleQuantityContainer" class="form-group">
-                            <label for="bottleQuantity">idadi ya chupa</label><br>
-                            <input name="quantity" inputmode="numeric"
-                                style="width: 110px;border: 1px solid grey !important" id="bottleQuantity" type="number"
-                                min="0" class="bg-app btn" required>
-                        </div>
-
-                        <div id="bottleTotalAmountContainer" class="my-2">
-                            <label for="bottleTotalAmount">Jumla ya malipo</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;" type="number"
-                                min="0" id="bottleTotalAmount" name="amount" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <button style="width: 110px;" type="submit" class="btn text-center btn-app">Submit</button>
-                    </form>
-                </div>
-                {{-- mauzo kwa lita................................................................ --}}
-
-                <div style="display: none" class="pt-5 my-2 my-md-5" id="rejareja">
-                    <h5 class="h4 py-3 text-app text-times">Mauzo ya rejareja</h5>
-                    <form method="POST" action="{{ route('save_litre_income') }}" class="form">
-                        @csrf
-                        <div class="form-group">
-                            <label for="bottleMilkType">Aina ya maziwa</label>
-                            <select style="width:110px" class="d-block p-1" name="milk_type" id="volumeMilkType">
-                                <option selected value="mgando">mgando</option>
-                                <option value="fresh">fresh</option>
-                            </select>
-                        </div>
-
-                        <div id="volume_container" class="form-group">
-                            <label for="volume">Aina ya kipimo</label>
-                            <select style="width:110px" class="d-block p-1" name="volume" id="volume">
-                                @forelse ($mgando_volumes as $volume)
-                                    <option value={{ $volume->price }}>{{ $volume->volume }}</option>
-                                @empty
-                                    <option value="">hakuna taarifa</option>
-                                @endforelse
-                            </select>
-                        </div>
-
-                        <div class="my-2">
-                            <label for="volume_price">bei</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;"
-                                value={{ $mgando_volumes->count() > 0 ? $mgando_volumes[0]->price : 0 }} type="number"
-                                id="volume_price" name="price" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <div id="volumeQuantityContainer" class="form-group">
-                            <label for="volumeQuantity">idadi</label><br>
-                            <input name="quantity" inputmode="numeric"
-                                style="width: 110px;border: 1px solid grey !important" id="volumeQuantity" type="number"
-                                min="0" class="bg-app btn" required>
-                        </div>
-
-                        <div id="volumeTotalAmountContainer" class="my-2">
-                            <label for="volumeTotalAmount">Jumla ya malipo</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;" type="number"
-                                min="0" id="volumeTotalAmount" name="amount" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <button style="width: 110px;" type="submit" class="btn text-center btn-app">Submit</button>
-                    </form>
-                </div>
-
-                {{-- mauzo ya yogurt ....................................................................... --}}
-
-                <div style="display: none" class="pt-5 my-2 my-md-5" id="yogurt">
-                    <h5 class="h4 py-3 text-app text-times">Mauzo ya yogurt</h5>
-                    <form method="POST" action="{{ route('save_yogurt_income') }}" class="form">
-                        @csrf
-
-                        <div id="yogurt_container" class="form-group">
-                            <label for="yogurt_capacity">Jina/ujazo wa chupa</label>
-                            <select style="width:110px" class="d-block p-1" name="capacity" id="yogurt_capacity">
-                                @forelse ($yogurt_bottles as $bottle)
-                                    <option value={{ $bottle->price }}>{{ $bottle->capacity }}</option>
-                                @empty
-                                    <option value="">hakuna taarifa</option>
-                                @endforelse
-                            </select>
-                        </div>
-
-                        <div class="my-2">
-                            <label for="yogurt_price">bei</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;"
-                                value={{ $yogurt_bottles->count() > 0 ? $yogurt_bottles[0]->price : 0 }} type="number"
-                                id="yogurt_price" name="price" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <div id="yogurtQuantityContainer" class="form-group">
-                            <label for="yogurtQuantity">idadi</label><br>
-                            <input name="quantity" inputmode="numeric"
-                                style="width: 110px;border: 1px solid grey !important" id="yogurtQuantity" type="number"
-                                min="0" class="bg-app btn" required>
-                        </div>
-
-                        <div id="yogurtTotalAmountContainer" class="my-2">
-                            <label for="yogurtTotalAmount">Jumla ya malipo</label><br>
-                            <input style="border: 1px solid grey !important;border-radius: 4px; width: 110px;" type="number"
-                                min="0" id="yogurtTotalAmount" name="amount" class="p-1 bg-app text-center" required>
-                        </div>
-
-                        <button style="width: 110px;" type="submit" class="btn text-center btn-app">Submit</button>
-                    </form>
-                </div>
+                  @include('includes.mauzo_kwa_chupa')
+                  {{-- mauzo kwa rejareja................................................................ --}}
+                  @include('includes.mauzo_kwa_rejareja')
+                  {{-- mauzo ya yogurt ....................................................................... --}}
+                  @include('includes.mauzo_ya_yogurt')
 
             </div>
         </div>
@@ -225,7 +94,7 @@
                 $("#volume_price").val(price);
                             $("#volumeTotalAmount").val(0);
                             $("#volumeQuantity").val(0);
-            });
+            }); 
 
             //fetching system bottles available according to type of  milk
 

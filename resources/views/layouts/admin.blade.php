@@ -25,8 +25,8 @@ input[type=number] {
         </style>
     </head> 
     <body class="sb-nav-fixed">
-        <div id="loader_container">
-            <div id="page_loader">
+        <div style="z-index: 1051" id="loader_container">
+            <div style="z-index: 1051" id="page_loader">
                     <div id="spinner" class="spinner-border text-primary"></div>
             </div>
         </div>
@@ -94,10 +94,6 @@ input[type=number] {
 
                             @auth
                              @if(Auth::user()->isAdmin())
-                            <a  class="nav-link text-capitalize" href="{{ route('production.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
-                                Achievements
-                            </a>
                             <a  class="nav-link text-capitalize" href="{{ route('edit_info') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
                                 Edit information
@@ -116,10 +112,17 @@ input[type=number] {
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class=" text-light" href="{{ route('general.report') }}" >
-                                        View reports
+                                        Income&cost reports
                                     </a>
                                     <a class="text-light " href="{{ route('print_reports') }}" >
-                                        Print reports
+                                        Print Income&cost reports
+                                    </a>
+                                    <a class="text-light " href="{{ route('production.today_report') }}" >
+                                        production reports
+                                    </a>
+
+                                    <a class="text-light " href="{{ route('production.index') }}" >
+                                        Achievement reports
                                     </a>
                              
                                     

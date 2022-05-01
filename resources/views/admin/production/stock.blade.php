@@ -1,70 +1,129 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
 
+        <div class="row justify-content-center p-2">
+            <div class="col-md-9 my-2">
+                <h2 class="text-times font-22 text-app font-weight-bold">Our Current Stock</h2>
+                        @if (Session()->has('spoiled_milk_removed'))
+                            <div class="alert alert-success my-2">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <p>{{ Session('spoiled_milk_removed') }}</p>
+                            </div>
+                        @endif
+                        @if (Session()->has('spoiled_bottle_removed'))
+                            <div class="alert alert-success my-2">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <p>{{ Session('spoiled_bottle_removed') }}</p>
+                            </div>
+                        @endif
+{{-- rejareja stock............................................................................... --}}
+       @include('includes.rejareja_stock')
+{{-- bottles stock.................................................................   --}}
+       @include('includes.bottles_stock')
 
-        <div class=" my-4">
-            <div class="">
-                <h5 class="card-heading text-app">
-                    Our Stock
-                </h5>
-                <p class="text-lead text-muted text-arial text-capitalize">mapokezi ya maziwa</p>
             </div>
-         <div class="table-responsive">
-             <table class="table table-striped">
-             <thead>
-                 <tr>
-                     <th></th>
-                 </tr>
-             </thead>
-             <tbody>
-                 <tr>
-                     <td></td>
-                 </tr>
-             </tbody>
-             </table>
-         </div> 
-
         </div>
     </div>
 @stop()
 @section('scripts')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
 
-            $("#date_btn").click(function(e) {
-                $("#date_div").toggle();
-                e.stopPropagation();
-            })
-
-            $("#date_range_btn").click(function(e) {
-                $("#date_range_div").toggle();
-                e.stopPropagation();
-            })
-
-            $(document).click(function() {
-                $("#date_div").hide();
-                $("#date_range_div").hide();
+            $("#bottles_container").on("change", ".bottle_capacity", function() {
+              
+                 $("#bottle_quantity").val(0);
             });
 
-            $("#date_div").click(function(e) {
-                e.stopPropagation();
-            })
-            $("#date_range_div").click(function(e) {
-                e.stopPropagation();
-            })
+            //changing bottle capacities with change in milk type...................
+            $("#bottle_milk_type").change(function() {
+               
+                if ($(this).val() == "maziwa mgando") {  
+  //fetch maziwa mgando bottles .......................................................
+                let milk_type = "mgando";
+                let url = "{{ url('production/fetch_production_bottles') }}" + "/" + milk_type;
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    beforeSend: function() {
+                        $("#loader_container").fadeIn();
+                    },
+                    complete: function() {
+                        $("#loader_container").fadeOut();
+                    },
+                    success: function(res) {
+                    //replacing latest bottle information with ones from server.............
+                    $("#bottle_types").replaceWith(res.data);
+                    $("#litres_quantity").val(0);
+                    $("#bottle_quantity").val(0);
+   
+                    },
+                    error: function() {
+                        alert('something went wrong please try again later');
+                    }
+                });
+          
 
-            $("#chupa_btn").click(function() {
-                $(".chupa-section").show();
-                $(".lita-section").hide();
-            })
+                }
 
-            $("#lita_btn").click(function() {
-                $(".chupa-section").hide();
-                $(".lita-section").show();
-            })
+                if ($(this).val() == "maziwa fresh") {
+              //fetch maziwa fresh bottles .......................................................
+                let milk_type = "fresh";
+                let url = "{{ url('production/fetch_production_bottles') }}" + "/" + milk_type;
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    beforeSend: function() {
+                        $("#loader_container").fadeIn();
+                    },
+                    complete: function() {
+                        $("#loader_container").fadeOut();
+                    },
+                    success: function(res) {
+                    //replacing latest bottle information with ones from server.............
+                    $("#bottle_types").replaceWith(res.data);
+                    $("#litres_quantity").val(0);
+                    $("#bottle_quantity").val(0);
+   
+                    },
+                    error: function() {
+                        alert('something went wrong please try again later');
+                    }
+                });
+                }
 
-        });
+                if ($(this).val() == "yogurt") {
+  //fetch  yogurt bottles .......................................................
+                let milk_type = "yogurt";
+                let url = "{{ url('production/fetch_production_bottles') }}" + "/" + milk_type;
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    beforeSend: function() {
+                        $("#loader_container").fadeIn();
+                    },
+                    complete: function() {
+                        $("#loader_container").fadeOut();
+                    },
+                    success: function(res) {
+                    //replacing latest bottle information with ones from server.............
+                    $("#bottle_types").replaceWith(res.data);
+                    $("#litres_quantity").val(0);
+                    $("#bottle_quantity").val(0);
+   
+                    },
+                    error: function() {
+                        alert('something went wrong please try again later');
+                    }
+                });
 
-    </script>
+                }
+
+            });
+
+
+    });
+
+</script>
 @stop
+

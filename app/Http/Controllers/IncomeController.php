@@ -198,9 +198,11 @@ class IncomeController extends Controller
         if ($milk_type == "mgando") {
             $data = MgandoBottle::where('price', $request->bottle_capacity)->first();
             $bottle_capacity = $data->capacity;
+            $stock_milk_type = "maziwa mgando";
         } else {
             $data = FreshBottle::where('price', $request->bottle_capacity)->first();
             $bottle_capacity = $data->capacity;
+            $stock_milk_type = "maziwa fresh";
         }
 
         $income = new Income();
@@ -211,6 +213,9 @@ class IncomeController extends Controller
         $income->amount  = $request->amount;
         $income->added_by = Auth::user()->name;
         $income->save();
+        //update stock with current change(sells)........................ 
+         $stock_object = new StockController();
+         $stock_object->remove_bottles($stock_milk_type,$bottle_capacity, $request->quantity);
         session()->flash('income_saved', 'taarifa zimehifadhika kikamilifu');
         return redirect()->back();
     }
@@ -228,9 +233,11 @@ class IncomeController extends Controller
         if ($milk_type == "mgando") {
             $data = MgandoVolume::where('price', $request->volume)->first();
             $volume = $data->volume;
+            $stock_milk_type = "maziwa mgando";
         } else {
             $data = FreshVolume::where('price', $request->volume)->first();
             $volume = $data->volume;
+            $stock_milk_type = "maziwa fresh";
         }
 
         $income = new LitreIncome();
@@ -241,6 +248,19 @@ class IncomeController extends Controller
         $income->amount  = $request->amount;
         $income->added_by = Auth::user()->name;
         $income->save();
+        //update stock with current change(sells)........................
+        if ($volume == "lita" || $volume == "lita moja") {
+            $litres = $request->quantity;
+        } elseif ($volume == "nusu lita" || $volume == "nusu") {
+            $litres = $request->quantity / 2 ;
+        }elseif ($volume == "robo lita" || $volume == "robo") {
+            $litres = $request->quantity / 4 ;
+        }else{
+            session()->flash('income_saved', 'taarifa za malipo zimehifadhika kikamilifu lakini stock haijabadilika  kwasababu umetumia aina ya ujazo isiyo sahihi...Unaweza tumia fomu ya maziwa yaliyoharibika kuondoa kiasi cha maziwa uliyouza');
+            return redirect()->back();            
+        }
+        $stock_object = new StockController();
+        $stock_object->remove_litres($stock_milk_type,$litres);
         session()->flash('income_saved', 'taarifa zimehifadhika kikamilifu');
         return redirect()->back();
     }
@@ -264,6 +284,9 @@ class IncomeController extends Controller
         $income->amount  = $request->amount;
         $income->added_by = Auth::user()->name;
         $income->save();
+        //update stock now..............................
+        $stock_object = new StockController();
+        $stock_object->remove_bottles("yogurt", $capacity,$request->quantity);
         session()->flash('income_saved', 'taarifa zimehifadhika kikamilifu');
         return redirect()->back();
     }
@@ -293,12 +316,21 @@ class IncomeController extends Controller
         if ($milk_type == "mgando") {
             $data = MgandoBottle::where('price', $request->bottle_capacity)->first();
             $bottle_capacity = $data->capacity;
+            $stock_milk_type = "maziwa mgando";
         } else {
             $data = FreshBottle::where('price', $request->bottle_capacity)->first();
             $bottle_capacity = $data->capacity;
+            $stock_milk_type = "maziwa fresh";
         }
 
         $income = Income::findOrFail($income_id);
+        //update stock with current change(sells)........................ 
+        //adding removed bottles during previous invalid sell........................ 
+        $stock_object = new StockController();
+        $stock_object->add_bottles( "maziwa ".$income->milk_type, $income->bottle_capacity, $income->quantity);
+        //removing correct number of sold bottles.....................
+        $stock_object->remove_bottles($stock_milk_type, $bottle_capacity, $request->quantity);
+        //finalization with updating of income.....................................
         $income->milk_type  = $milk_type;
         $income->bottle_capacity  = $bottle_capacity;
         $income->price  = $request->price;
@@ -334,12 +366,38 @@ class IncomeController extends Controller
         if ($milk_type == "mgando") {
             $data = MgandoVolume::where('price', $request->volume)->first();
             $volume = $data->volume;
+            $stock_milk_type = "maziwa mgando";
         } else {
             $data = FreshVolume::where('price', $request->volume)->first();
             $volume = $data->volume;
+            $stock_milk_type = "maziwa fresh";
         }
 
         $income = LitreIncome::findOrFail($income_id);
+        //update stock with current change(sells)........................
+        if ($income->volume == "lita" || $income->volume == "lita moja") {
+            $prev_litres = $income->quantity;
+        } elseif ($income->volume == "nusu lita" || $income->volume == "nusu") {
+            $prev_litres = $income->quantity / 2;
+        } elseif ($income->volume == "robo lita" || $income->volume == "robo") {
+            $prev_litres = $income->quantity / 4;
+        }
+
+        //update stock with current change(sells)........................ 
+        //adding removed litres during previous invalid sell........................ 
+        $stock_object = new StockController();
+        $stock_object->add_litres("maziwa ".$income->milk_type, $prev_litres);
+        //removing correct number of sold litres.....................
+        if ($volume == "lita" || $volume == "lita moja") {
+            $latest_litres = $request->quantity;
+        } elseif ($volume == "nusu lita" || $volume == "nusu") {
+            $latest_litres = $request->quantity / 2;
+        } elseif ($volume == "robo lita" || $volume == "robo") {
+            $latest_litres = $request->quantity / 4;
+        }
+        $stock_object->remove_litres($stock_milk_type, $latest_litres);
+        //finalization with updating of income.....................................
+
         $income->milk_type = $milk_type;
         $income->volume = $volume;
         $income->price = $request->price;
@@ -372,6 +430,13 @@ class IncomeController extends Controller
         $capacity = $data->capacity;
 
         $income = YogurtIncome::findOrFail($income_id);
+        //update stock with current change(sells)........................ 
+        //adding removed bottles during previous invalid sell........................ 
+        $stock_object = new StockController();
+        $stock_object->add_bottles("yogurt", $income->capacity, $income->quantity);
+        //removing correct number of sold bottles.....................
+        $stock_object->remove_bottles("yogurt", $capacity, $request->quantity);
+        //finalization with updating of income.....................................
         $income->capacity = $capacity;
         $income->price = $request->price;
         $income->quantity = $request->quantity;
@@ -387,6 +452,9 @@ class IncomeController extends Controller
     public function remove_bottle_income($income_id)
     {
         $income = Income::findOrFail($income_id);
+        //updating stock...............................................................
+        $stock_object = new StockController();
+        $stock_object->add_bottles("maziwa " . $income->milk_type, $income->bottle_capacity, $income->quantity);
         $income->delete();
         session()->flash('income_removed', 'taarifa zimeondolewa kikamilifu');
         return redirect()->route('dashboard');
@@ -395,6 +463,19 @@ class IncomeController extends Controller
     public function remove_litre_income($income_id)
     {
         $income = LitreIncome::findOrFail($income_id);
+        //update stock with current change(sells)........................
+        if ($income->volume == "lita" || $income->volume == "lita moja") {
+            $prev_litres = $income->quantity;
+        } elseif ($income->volume == "nusu lita" || $income->volume == "nusu") {
+            $prev_litres = $income->quantity / 2;
+        } elseif ($income->volume == "robo lita" || $income->volume == "robo") {
+            $prev_litres = $income->quantity / 4;
+        }
+
+        //update stock with current change(sells)........................ 
+        //adding removed litres during previous invalid sell........................ 
+        $stock_object = new StockController();
+        $stock_object->add_litres("maziwa " . $income->milk_type, $prev_litres);
         $income->delete();
         session()->flash('income_removed', 'taarifa zimeondolewa kikamilifu');
         return redirect()->route('dashboard');
@@ -403,6 +484,9 @@ class IncomeController extends Controller
     public function remove_yogurt_income($income_id)
     {
         $income = YogurtIncome::findOrFail($income_id);
+        //updating stock...............................................................
+        $stock_object = new StockController();
+        $stock_object->add_bottles("yogurt", $income->capacity, $income->quantity);
         $income->delete();
         session()->flash('income_removed', 'taarifa zimeondolewa kikamilifu');
         return redirect()->route('dashboard');

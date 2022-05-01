@@ -340,9 +340,9 @@
                     </div>
                 </div>
                 <div class="mt-1" id="analysis_container">
-                    <div style=" display: inline-block !important;border-radius: 7px;border: 2px solid #9273d2; margin-top: 37px;">
+                    <div style=" display: inline-block !important;border-radius: 7px; margin-top: 37px;">
                         <div class="card-body" style="padding: 5px;">
-                            <h3 style="color: black; margin: 1px auto;" class=" text-times">ANALYSIS</h3><br>
+                            <h5 style="color: black; margin: 1px auto;" class=" text-times">ANALYSIS</h5><br>
 
                             <h5 class=" text-times font-18">Jumla ya mapato: <span class="text-app font-weight-bold">{{ number_format($total_income) }} Tsh</span> </h5>
                             <h5 class=" text-times font-18">Jumla ya matumizi: <span class="text-app font-weight-bold">{{ number_format($total_expense) }} Tsh</span> </h5>

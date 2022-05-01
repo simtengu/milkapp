@@ -1,7 +1,7 @@
                 <div class=" my-4 px-3">
                     <div class=" mt-5">
                         <h5 class=" text-dark mb-4">
-                           Uzalishaji chupa
+                            Uzalishaji chupa
                         </h5>
                     </div>
                     <!-- The Modal -->
@@ -10,30 +10,61 @@
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Uzalishaji Rejareja</h4>
+                                <div class="modal-header bg-light">
+                                    <h4 class="modal-title">Uzalishaji Chupa</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <form method="POST" action="{{ route('production.produce_litre') }}" class="form">
+                                    <form method="POST" action="{{ route('production.produce_bottle') }}"
+                                        class="form">
                                         @csrf
-                                        
 
-                                            <div class="form-group">
-                                                <label for="milk_type" class="text-muted text-arial font-18">Aina ya maziwa </label>
-                                                <select class="form-control text-dark" name="milk_type" id="milk_type" required>
-                                                    <option value="maziwa mgando" selected>mgando</option>
-                                                    <option value="maziwa fresh" >fresh</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted text-arial font-18" for="litre">Idadi ya lita</label>
-                                                <input type="number" min="0" name="litre" id="litre" class="form-control" placeholder="weka idadi" required>
-                                            </div>
-                                            <button type="submit" class="btn btn-app">Ongeza</button>
-                                        
+
+                                        <div class="form-group">
+                                            <label for="bottle_milk_type" class="text-muted text-arial font-18">Aina ya
+                                                maziwa </label>
+                                            <select class="form-control text-dark" name="milk_type"
+                                                id="bottle_milk_type" required>
+                                                <option value="maziwa mgando" selected>mgando</option>
+                                                <option value="maziwa fresh">fresh</option>
+                                                <option value="yogurt">yogurt</option>
+                                            </select>
+                                        </div>
+                                        {{-- bottle types and capacities(to be changed by ajax calls) ...................................................................... --}}
+                                        <div id="bottles_container" class="form-group">
+                                            <label class="text-muted text-arial font-18" for="mgando_bottles">Aina ya
+                                                chupa</label>
+                                            <select class="form-control  bottle_capacity" name="bottle_capacity"
+                                                id="bottle_types">
+                                                <option value="">chagua</option>
+                                                @forelse ($mgando_bottles as $bottle)
+                                                    <option value="{{ $bottle->capacity }}">{{ $bottle->capacity }}
+                                                    </option>
+                                                @empty
+                                                    <option value="">hakuna taarifa</option>
+                                                @endforelse
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="litres_quantity" class="text-muted text-arial font-18">Idadi ya
+                                                lita</label>
+                                            <input type="number" min="0" name="litre" class="form-control"
+                                                id="litres_quantity" required step="any">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="bottle_quantity" class="text-muted text-arial font-18">Idadi ya
+                                                chupa</label>
+                                            <input type="number" min="0" name="bottle_quantity" class="form-control"
+                                                id="bottle_quantity" novalidate>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-app">Ongeza</button>
+
                                     </form>
                                 </div>
 
@@ -48,77 +79,57 @@
                                 class="btn btn-sm btn-success">ongeza</button>
                         </div>
 
-                        @if (Session()->has('litres_produced'))
+                        @if (Session()->has('bottle_produced'))
                             <div class="alert alert-success my-2">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                <p>{{ Session('litres_produced') }}</p>
+                                <p>{{ Session('bottle_produced') }}</p>
                             </div>
                         @endif
-                        @if (Session()->has('litres_updated'))
+                        @if (Session()->has('bottle_updated'))
                             <div class="alert alert-success my-2">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                <p>{{ Session('litres_updated') }}</p>
+                                <p>{{ Session('bottle_updated') }}</p>
                             </div>
                         @endif
 
                         <table class="table table-striped">
+                            <thead class="text-app">
+                                <th>Aina ya maziwa</th>
+                                <th>Aina ya chupa</th>
+                                <th>Idadi ya lita</th>
+                                <th>Idadi ya chupa</th>
+                                <th>Edit</th>
+                            </thead>
                             <tbody>
-                                @forelse ($produced_litres as $item)
+                                @forelse ($produced_bottles as $item)
 
-                                <form method="POST"
-                                    action="{{ route('production.update_litre_produced', $item->id) }}"
-                                    class="form">
-                                    @method('PATCH')
-                                    @csrf
-                                <tr>
+                                    <tr>
                                         <td>
-                                            @if ($item->milk_type == 'maziwa fresh')
-                                            <select style="width: 150px !important" id="editFormInput" class="form-control text-dark" name="milk_type" id="milk_type" required>
-                                                <option value="maziwa mgando" >maziwa mgando</option>
-                                                <option value="maziwa fresh" selected>maziwa fresh</option>
-                                            </select>
-                                            @else 
-                                            <select style="width: 150px !important" id="editFormInput" class="form-control text-dark" name="milk_type" id="milk_type" required>
-                                                <option value="maziwa mgando" selected>maziwa mgando</option>
-                                                <option value="maziwa fresh" >maziwa fresh</option>
-                                            </select>
-                                                
-                                            @endif
+                                            {{ $item->milk_type }}
                                         </td>
                                         <td>
-                                            <div class="d-flex justify-content-around align-items-center">
-                                                <div>
-                                                    <p class="text-muted text-lead">Lita:</p>
-                                                </div>
-                                                <div>
-                                                        <div class=" form-group">
-                                                            <div class="d-flex">
-
-                                                                <input style="width: 50px !important" name="litre" id="editFormInput" class="text-dark"
-                                                                    value={{ $item->litre }} type="number" required />
-                                                                <button type="submit"
-                                                                    class="btn btn-warning btn-sm">edit</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            {{ $item->bottle_capacity }}
                                         </td>
+                                        <td>{{ $item->litre }}</td>
+                                        <td>{{ $item->bottle_quantity }}</td>
+                                        <td><a href="{{ route('production.edit_bottle_produced',$item) }}" class="text-primary">edit</a></td>
                                     </tr>
-                                            </form>
+
 
                                 @empty
                                     <tr>
-                                        <td>
-                                            <p class="text-muted text-lead">Bado haujafanyika Uzalishaji wa maziwa ya rejareja</p>
+                                        <td colspan="5">
+                                            <p class="text-muted text-lead">Bado haujafanyika Uzalishaji wa maziwa ya
+                                                rejareja</p>
                                         </td>
                                     </tr>
 
                                 @endforelse
                             </tbody>
                         </table>
-                        <div>
-                            <p class="text-muted font-16 text-capitalize px-2 font-weight-bold mt-2">Jumla: lita
-                                total: 848</p>
+                        <div class="text-muted font-16 text-capitalize px-2  mt-2">
+                            <p class="font-weight-bold">Jumla(maziwa pekee)</p>
+                            <p>lita: {{ $total_bottle_litres }}, chupa: {{ $total_bottle_quantity }}</p>
                         </div>
                     </div>
 

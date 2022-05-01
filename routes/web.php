@@ -10,6 +10,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,9 @@ Route::get('/general_report', [ReportController::class, 'index'])->name('general
 Route::get('/all_data_report', [ReportController::class, 'all_data'])->name('all.report');
 Route::post('/date_report', [ReportController::class, 'date_data'])->name('date.report');
 Route::post('/date_range_report', [ReportController::class, 'date_range_data'])->name('date_range.report');
+Route::get('/achievements', [ReportController::class, 'production'])->name('production.index');
+Route::get('/production/today_report', [ProductionController::class, 'production_report'])->name('production.today_report');
+Route::post('/production/date_report', [ProductionController::class, 'production_at_date'])->name('production.date_report');
 
 //admin reports print routes..............................................................
 Route::get('/print/print_reports', [ReportController::class, 'print_reports'])->name('print_reports');
@@ -112,13 +116,11 @@ Route::post('print//date_report', [ReportController::class, 'print_date_data'])-
 Route::post('print//date_range_report', [ReportController::class, 'print_date_range_data'])->name('print.date_range.report');
 
 //admin production display routes..................................................
-Route::get('/achievements',[ReportController::class,'production'])->name('production.index');
-Route::get('/production_all_data',[ReportController::class,'production_all_data'])->name('production.all_filter');
-Route::post('/production/date_report', [ReportController::class, 'production_date'])->name('production.date_filter');
-Route::post('/production/date_range_report', [ReportController::class, 'production_date_range'])->name('production.date_range_filter');
+Route::get('/achievement_all_data',[ReportController::class,'production_all_data'])->name('production.all_filter');
+Route::post('/achievement/date_report', [ReportController::class, 'production_date'])->name('production.date_filter');
+Route::post('/achievement/date_range_report', [ReportController::class, 'production_date_range'])->name('production.date_range_filter');
 //end of admin reports routes.......................................................
 //stock and production routes.....................................................................................
-Route::get('/stock',[ProductionController::class,'stock'])->middleware('auth','isAdmin')->name('stock.index');
 Route::get('/production',[ProductionController::class,'index'])->middleware('auth','isAdmin')->name('production');
 Route::post('/production/receive_milk', [ProductionController::class, 'receive_milk'])->middleware('auth','isAdmin')->name('production.receive_milk');
 Route::patch('/update_received_litre/{id}',[ProductionController::class, 'update_received_milk'])->middleware('auth','isAdmin')->name('production.update_received_milk');
@@ -129,6 +131,13 @@ Route::patch('/update_litres_produced/{id}',[ProductionController::class, 'updat
 
 //bottle production................ 
 Route::post('/production/bottle_production', [ProductionController::class, 'produce_bottle'])->name('production.produce_bottle');
+Route::get('/production/fetch_production_bottles/{milk_type}', [ProductionController::class, 'fetch_bottles'])->name('production.fetch_bottles');
+Route::patch('production/update_bottles_produced/{id}', [ProductionController::class, 'update_bottle_produced'])->middleware('auth', 'isAdmin')->name('production.update_bottle_produced');
+Route::get('production/edit_produced_bottles/{data}', [ProductionController::class, 'edit_bottle_produced'])->middleware('auth', 'isAdmin')->name('production.edit_bottle_produced');
+//stock routes......................................................
+Route::get('/stock', [StockController::class, 'index'])->name('stock.index');
+Route::post('/stock/remove_spoiled_milk', [StockController::class, 'remove_spoiled_milk'])->name('stock.remove_spoiled_milk');
+Route::post('/stock/remove_spoiled_bottles', [StockController::class, 'remove_spoiled_bottles'])->name('stock.remove_spoiled_bottles');
 //end of stock and production routes..............................................................................
 Route::get('/testing',function(){
     

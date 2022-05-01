@@ -10,7 +10,7 @@
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
-                                <div class="modal-header">
+                                <div class="modal-header bg-light">
                                     <h4 class="modal-title">Pokea maziwa</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
@@ -23,7 +23,7 @@
 
                                             <p class="text-dark text-arial font-18">Idadi ya lita</p>
                                             <div class="form-group d-flex">
-                                                <input name="lita" type="number" min="0" class="form-control" required>
+                                                <input name="lita" type="number" min="0" class="form-control" required novalidate>
                                                 <button type="submit" class="btn btn-app">Ongeza</button>
                                             </div>
                                         </div>

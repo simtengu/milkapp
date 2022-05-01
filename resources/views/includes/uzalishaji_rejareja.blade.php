@@ -10,7 +10,7 @@
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
-                                <div class="modal-header">
+                                <div class="modal-header bg-light">
                                     <h4 class="modal-title">Uzalishaji Rejareja</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
@@ -30,7 +30,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="text-muted text-arial font-18" for="litre">Idadi ya lita</label>
-                                                <input type="number" min="0" name="litre" id="litre" class="form-control" placeholder="weka idadi" required>
+                                                <input type="number" min="0" name="litre" id="litre" class="form-control" placeholder="weka idadi" required >
                                             </div>
                                             <button type="submit" class="btn btn-app">Ongeza</button>
                                         
@@ -72,18 +72,7 @@
                                     @csrf
                                 <tr>
                                         <td>
-                                            @if ($item->milk_type == 'maziwa fresh')
-                                            <select style="width: 150px !important" id="editFormInput" class="form-control text-dark" name="milk_type" id="milk_type" required>
-                                                <option value="maziwa mgando" >maziwa mgando</option>
-                                                <option value="maziwa fresh" selected>maziwa fresh</option>
-                                            </select>
-                                            @else 
-                                            <select style="width: 150px !important" id="editFormInput" class="form-control text-dark" name="milk_type" id="milk_type" required>
-                                                <option value="maziwa mgando" selected>maziwa mgando</option>
-                                                <option value="maziwa fresh" >maziwa fresh</option>
-                                            </select>
-                                                
-                                            @endif
+{{ $item->milk_type }}
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-around align-items-center">
@@ -94,7 +83,7 @@
                                                         <div class=" form-group">
                                                             <div class="d-flex">
 
-                                                                <input style="width: 50px !important" name="litre" id="editFormInput" class="text-dark"
+                                                                <input style="width: 60px !important" name="litre" id="editFormInput" class="text-dark"
                                                                     value={{ $item->litre }} type="number" required />
                                                                 <button type="submit"
                                                                     class="btn btn-warning btn-sm">edit</button>
